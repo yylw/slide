@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        p{
+            margin: 0;
+        }
+        html,body{
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            -webkit-transform-style:preserve-3d;
+            -webkit-backface-visibility:hidden;
+        }
+        .container{
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        .show{
+            display: block !important;
+        }
+        .mask-layer{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,.7);
+            display: none;
+        }
+        .slide-selector{
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 270px;
+            overflow: auto;
+            background: #fff;
+            transform: translate3d(0,100%,0);
+            transition: transform .3s ease-in-out;
+        }
+        .slide-wrapper{
+            position: relative;
+            height: 225px;
+            overflow: hidden;
+        }
+        .slide-options{
+            position: absolute;
+            width: 100%;
+            text-align: center;
+        }
+        .slide-active{
+            transform: translate3d(0,0,0);
+        }
+        .slide-mask{
+            position: absolute;
+            z-index: 11002;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: linear-gradient(#fff 0, rgba(245, 245, 245, 0) 52%, rgba(245, 245, 245, 0) 48%, #fff 100%);
+            background: -webkit-gradient(linear, left bottom, left top, from(#fff), color-stop(0.52, rgba(245, 245, 245, 0)), color-stop(0.48, rgba(245, 245, 245, 0)), to(#fff));
+            background: -webkit-linear-gradient(#fff 0, rgba(245, 245, 245, 0) 52%, rgba(245, 245, 245, 0) 48%, #fff 100%);
+            background: -moz-linear-gradient(#fff 0, rgba(245, 245, 245, 0) 52%, rgba(245, 245, 245, 0) 48%, #fff 100%);
+        }
+        .slide-header{
+            height: 44px;
+            line-height: 44px;
+            text-align: center;
+            position: relative;
+            background: lightgoldenrodyellow;
+            z-index: 1;
+        }
+        .slide-sure,.slide-cancel{
+            position: absolute;
+            top: 0;
+            padding: 8px;
+            margin:5px;
+            border: 1px solid #eee;
+            font-size: .8rem;
+            line-height: 1;
+            z-index: 1;
+        }
+        .slide-sure{
+            right: 0;
+            color: #f23438;
+        }
+        .slide-cancel{
+            left: 0;
+        }
+        .slide-option{
+            height: 45px;
+            line-height: 45px;
+            text-indent: .8rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="hit-me">点我</div>
+
+        <div class="mask-layer"></div>
+
+    </div>
+
+    <script src="slideSelect2.js"></script>
+    <script>
+
+        var ss = new slideSelector();
+        document.querySelector('.hit-me').addEventListener('click',function(){
+            ss.show({
+                title:'information',
+                init: 0,
+                data:['1409FE.D','1407D','ccc','aaa','vvv','1409FE.D','1407D','ccc','aaa','vvv','1409FE.D','1407D','ccc','aaa','vvv','1409FE.D','1407D','ccc','aaa','vvv','1409FE.D','1407D','ccc','aaa','vvv'],
+                sCallback:function(selected){
+                    //console.log(selected);
+                },
+                done:function(data){
+                    console.log(data);
+                    document.querySelector('.hit-me').innerHTML = data.value;
+                }
+            });
+        },false);
+    </script>
+
+
+
+
+</body>
+</html>
